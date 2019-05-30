@@ -16,15 +16,14 @@
 </head>
 <body>
     <div class="container">
-
         <h2>Survey Questions</h2>
-        <hr />
+        <hr>
         <h3><strong>About You</strong></h3>
         <h4>Name (Required)</h4>
         <input type="text" name="" id="name" class="form-control" placeholder="Enter Your Name Here" required />
         <h4>Link to photo (Required)</h4>
         <input type="text" name="" id="photo" class="form-control" placeholder="Place Link to Photo Here" required />
-        <hr />
+        <hr>
 
         <h3><strong>Question 1</strong></h3>
         <h4>Pizza is your favorite food.</h4>
@@ -135,23 +134,13 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
-        <br />
-        <br />
+        <br>
+        <br>
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
-            <i class="fa fa-check-circle" aria-hidden="true"></i> Submit
+         Submit
         </button>
-        <br />
-        <br />
-
-        <footer class="footer text-center">
-            <div class="container">
-                <p>
-                    <a href="#">About Dave Cox</a> |
-                    <a href="https://github.com/Dcoxmen/friend-finder">GitHub Repo</a>
-                    <br />
-                </p>
-            </div>
-        </footer>
+        <br>
+        <br>
     </div>
     <div id="resultsModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -160,13 +149,12 @@
                     <button type="button" class="close" data-dismiss="modal">
                         &times;
                     </button>
-                    <h2 class="modal-title"><strong>Best Match</strong></h2>
+                    <h2 class="modal-title"><strong>Your Best Match</strong></h2>
                 </div>
 
                 <div class="modal-body">
                     <h2 id="matchName"></h2>
-                    <img id="matchImg" src="https://via.placeholder.com/400x400"
-                        alt="Placeholder image in case user pic doesn't show" />
+                    <img id="matchImg" src="https://embarkvet.com/wp-content/uploads/2018/10/embark-Corgis_6.jpg" alt="No Picture Provided">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -176,7 +164,15 @@
             </div>
         </div>
     </div>
-
+<style>
+#matchImg {
+    width: 550px;
+    height:400px;
+}
+</style>
+<footer>
+    <p><a href="/api/friends">API Friends List</a> |<a href="https://github.com/lishure"> GitHub Repo</a></p>
+</footer>
     <script type="text/javascript">
         $("#submit").on("click", function () {
             function validateForm() {

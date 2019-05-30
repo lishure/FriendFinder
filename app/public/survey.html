@@ -142,6 +142,7 @@
         <br>
         <br>
     </div>
+    <!-- Add modal -->
     <div id="resultsModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -174,9 +175,11 @@
     <p><a href="/api/friends">API Friends List</a> |<a href="https://github.com/lishure"> GitHub Repo</a></p>
 </footer>
     <script type="text/javascript">
+    //On click function to capture user data
         $("#submit").on("click", function () {
             function validateForm() {
                 var isValid = true;
+                //form control to make sure all questions are answered
                 $(".form-control").each(function () {
                     if ($(this).val() === "") isValid = false;
                 });
@@ -203,12 +206,14 @@
                     ]
                 };
                 var currentURL = window.location.origin;
+                //Posts user answers to friends.js
                 $.post(currentURL + "/api/friends", userData, function (data) {
                     $("#matchName").text(data.name);
                     $("#matchImg").attr("src", data.photo);
                     $("#resultsModal").modal("toggle");
                 });
             } else {
+                //alert if questions were not answered
                 alert("Please fill out all fields before submitting!");
             }
             return false;

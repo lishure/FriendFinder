@@ -7,8 +7,10 @@ module.exports = function(app) {
   });
 //post data to friends file
   app.post("/api/friends", function(req, res) {
-    var totalDifference = 0;
 
+  //set totalDifference to 0
+    var totalDifference = 0;
+//storing bestmatch in a variable using empty strings
     var bestMatch = {
       name: "",
       photo: "",
@@ -18,8 +20,9 @@ module.exports = function(app) {
     var userData = req.body;
     var userName = userData.name;
     var userScores = userData.scores;
-
+//uses .map for userScores array accepting callback function- used in place of for loop
     var b = userScores.map(function(item) {
+      //returns as an integer
       return parseInt(item, 10);
     });
     userData = {
@@ -30,7 +33,7 @@ module.exports = function(app) {
 
     console.log("Name: " + userName);
     console.log("User Score " + userScores);
-//sum of score differences
+//sum of score differences, reduce it down to one number
     var sum = b.reduce((a, b) => a + b, 0);
 
     console.log("Sum of users score " + sum);

@@ -188,7 +188,8 @@
                 });
                 return isValid;
             }
-            if (validateForm() == true) {
+            //if form is validated, all questions answered, store userData in variable
+            if (validateForm() === true) {
                 var userData = {
                     name: $("#name").val(),
                     photo: $("#photo").val(),
@@ -205,9 +206,8 @@
                         $("#question10").val()
                     ]
                 };
-                var currentURL = window.location.origin;
                 //Posts user answers to friends.js
-                $.post(currentURL + "/api/friends", userData, function (data) {
+                $.post("/api/friends", userData, function (data) {
                     $("#matchName").text(data.name);
                     $("#matchImg").attr("src", data.photo);
                     $("#resultsModal").modal("toggle");

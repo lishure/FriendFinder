@@ -176,36 +176,62 @@
 </footer>
     <script type="text/javascript">
     //On click function to capture user data
-        $("#submit").on("click", function () {
+    document.querySelector("#submit").addEventListener("click", function (event) {
             function validateForm() {
                 var isValid = true;
                 //form control to make sure all questions are answered
-                $(".form-control").each(function () {
-                    if ($(this).val() === "") isValid = false;
-                });
-                $(".chosen-select").each(function () {
-                    if ($(this).val() === "") isValid = false;
-                });
+                var formControl = document.querySelector(".form-control").value.trim()
+                var chosenSelect =  document.querySelector(".chosen-select").value.trim()
+                    if (formControl === "") {
+                    isValid = false; 
+                }
+                    if (chosenSelect === "") {
+                         isValid = false; 
+                        }
+                // $(".form-control").each(function () {
+                //     if ($(this).val() === "") isValid = false;
+                // });
+                // $(".chosen-select").each(function () {
+                //     if ($(this).val() === "") isValid = false;
+                // });
                 return isValid;
             }
             //if form is validated, all questions answered, store userData in variable
             if (validateForm() === true) {
                 var userData = {
-                    name: $("#name").val(),
-                    photo: $("#photo").val(),
+                    name: document.querySelector("#name").value.trim(),
+                    photo: document.querySelector("#photo").value.trim(),
                     scores: [
-                        $("#question1").val(),
-                        $("#question2").val(),
-                        $("#question3").val(),
-                        $("#question4").val(),
-                        $("#question5").val(),
-                        $("#question6").val(),
-                        $("#question7").val(),
-                        $("#question8").val(),
-                        $("#question9").val(),
-                        $("#question10").val()
+                        document.querySelector("#question1").value,
+                        document.querySelector("#question2").value,
+                        document.querySelector("#question3").value,
+                        document.querySelector("#question4").value,
+                        document.querySelector("#question5").value,
+                        document.querySelector("#question6").value,
+                        document.querySelector("#question7").value,
+                        document.querySelector("#question8").value,
+                        document.querySelector("#question9").value,
+                        document.querySelector("#question10").value
                     ]
-                };
+                }
+
+
+                // var userData = {
+                //     name: $("#name").val(),
+                //     photo: $("#photo").val(),
+                //     scores: [
+                //         $("#question1").val(),
+                //         $("#question2").val(),
+                //         $("#question3").val(),
+                //         $("#question4").val(),
+                //         $("#question5").val(),
+                //         $("#question6").val(),
+                //         $("#question7").val(),
+                //         $("#question8").val(),
+                //         $("#question9").val(),
+                //         $("#question10").val()
+                //     ]
+                // };
                 //Posts user answers to friends.js
                 $.post("/api/friends", userData, function (data) {
                     $("#matchName").text(data.name);

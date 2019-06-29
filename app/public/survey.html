@@ -191,16 +191,9 @@
                 if (chosenSelect === "") {
                     isValid = false;
                 }
-                // $(".form-control").each(function () {
-                //     if ($(this).val() === "") isValid = false;
-                // });
-                // $(".chosen-select").each(function () {
-                //     if ($(this).val() === "") isValid = false;
-                // });
                 return isValid;
             }
             //if form is validated, all questions answered, store userData in variable
-
             if (validateForm() === true) {
                 var userData = {
                     name: document.querySelector("#name").value.trim(),
@@ -218,40 +211,12 @@
                         document.querySelector("#question10").value
                     ]
                 }
-
-                // if (validateForm() === true) {
-                //     var userData = {
-                //         name: $("#name").val(),
-                //         photo: $("#photo").val(),
-                //         scores: [
-                //             $("#question1").val(),
-                //             $("#question2").val(),
-                //             $("#question3").val(),
-                //             $("#question4").val(),
-                //             $("#question5").val(),
-                //             $("#question6").val(),
-                //             $("#question7").val(),
-                //             $("#question8").val(),
-                //             $("#question9").val(),
-                //             $("#question10").val()
-                //         ]
-                //     };
                 //Posts user answers to friends.js
-                // var match = document.getElementById("#matchName")
-                // console.log("hello" , match)
-                // $.post("/api/friends", userData, function (data) {
-
-
-
-
                 $.post("/api/friends", userData, function (data) {
-                    // document.getElementById("#matchName").innerHTML = data.name
-                    //   $("#matchName").text(data.name);
                     document.querySelector("#matchName").innerHTML = data.name
-                    // $("#matchImg").attr("src", data.photo);
                     document.querySelector("#matchImg").setAttribute("src", data.photo)
-                    $("#resultsModal").modal("toggle");
-            
+                    //Modal using Bootstrap documentation, jQuery is needed for bootstrap modal
+                    $("#resultsModal").modal("toggle");       
                 });
             } else {
                 //alert if questions were not answered

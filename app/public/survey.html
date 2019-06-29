@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>FriendFinder</title>
     <!-- Bootstrap and jQuery -->
@@ -14,6 +15,7 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container">
         <h2>Survey Questions</h2>
@@ -137,7 +139,7 @@
         <br>
         <br>
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
-         Submit
+            Submit
         </button>
         <br>
         <br>
@@ -155,7 +157,8 @@
 
                 <div class="modal-body">
                     <h2 id="matchName"></h2>
-                    <img id="matchImg" src="https://embarkvet.com/wp-content/uploads/2018/10/embark-Corgis_6.jpg" alt="No Picture Provided">
+                    <img id="matchImg" src="https://embarkvet.com/wp-content/uploads/2018/10/embark-Corgis_6.jpg"
+                        alt="No Picture Provided">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -165,52 +168,90 @@
             </div>
         </div>
     </div>
-<style>
-#matchImg {
-    width: 550px;
-    height:400px;
-}
-</style>
-<footer>
-    <p><a href="/api/friends">API Friends List</a> |<a href="https://github.com/lishure"> GitHub Repo</a></p>
-</footer>
+    <style>
+        #matchImg {
+            width: 550px;
+            height: 400px;
+        }
+    </style>
+    <footer>
+        <p><a href="/api/friends">API Friends List</a> |<a href="https://github.com/lishure"> GitHub Repo</a></p>
+    </footer>
     <script type="text/javascript">
-    //On click function to capture user data
-    document.querySelector("#submit").addEventListener("click", function (event) {
+        //On click function to capture user data
+        document.querySelector("#submit").addEventListener("click", function (event) {
             function validateForm() {
                 var isValid = true;
                 //form control to make sure all questions are answered
-                $(".form-control").each(function () {
-                    if ($(this).val() === "") isValid = false;
-                });
-                $(".chosen-select").each(function () {
-                    if ($(this).val() === "") isValid = false;
-                });
+                var formControl = document.querySelector(".form-control").value.trim()
+                var chosenSelect = document.querySelector(".chosen-select").value.trim()
+                if (formControl === "") {
+                    isValid = false;
+                }
+                if (chosenSelect === "") {
+                    isValid = false;
+                }
+                // $(".form-control").each(function () {
+                //     if ($(this).val() === "") isValid = false;
+                // });
+                // $(".chosen-select").each(function () {
+                //     if ($(this).val() === "") isValid = false;
+                // });
                 return isValid;
             }
             //if form is validated, all questions answered, store userData in variable
+
             if (validateForm() === true) {
                 var userData = {
-                    name: $("#name").val(),
-                    photo: $("#photo").val(),
+                    name: document.querySelector("#name").value.trim(),
+                    photo: document.querySelector("#photo").value.trim(),
                     scores: [
-                        $("#question1").val(),
-                        $("#question2").val(),
-                        $("#question3").val(),
-                        $("#question4").val(),
-                        $("#question5").val(),
-                        $("#question6").val(),
-                        $("#question7").val(),
-                        $("#question8").val(),
-                        $("#question9").val(),
-                        $("#question10").val()
+                        document.querySelector("#question1").value,
+                        document.querySelector("#question2").value,
+                        document.querySelector("#question3").value,
+                        document.querySelector("#question4").value,
+                        document.querySelector("#question5").value,
+                        document.querySelector("#question6").value,
+                        document.querySelector("#question7").value,
+                        document.querySelector("#question8").value,
+                        document.querySelector("#question9").value,
+                        document.querySelector("#question10").value
                     ]
-                };
+                }
+
+                // if (validateForm() === true) {
+                //     var userData = {
+                //         name: $("#name").val(),
+                //         photo: $("#photo").val(),
+                //         scores: [
+                //             $("#question1").val(),
+                //             $("#question2").val(),
+                //             $("#question3").val(),
+                //             $("#question4").val(),
+                //             $("#question5").val(),
+                //             $("#question6").val(),
+                //             $("#question7").val(),
+                //             $("#question8").val(),
+                //             $("#question9").val(),
+                //             $("#question10").val()
+                //         ]
+                //     };
                 //Posts user answers to friends.js
+                // var match = document.getElementById("#matchName")
+                // console.log("hello" , match)
+                // $.post("/api/friends", userData, function (data) {
+
+
+
+
                 $.post("/api/friends", userData, function (data) {
-                    $("#matchName").text(data.name);
-                    $("#matchImg").attr("src", data.photo);
+                    // document.getElementById("#matchName").innerHTML = data.name
+                    //   $("#matchName").text(data.name);
+                    document.querySelector("#matchName").innerHTML = data.name
+                    // $("#matchImg").attr("src", data.photo);
+                    document.querySelector("#matchImg").setAttribute("src", data.photo)
                     $("#resultsModal").modal("toggle");
+            
                 });
             } else {
                 //alert if questions were not answered
